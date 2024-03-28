@@ -32,16 +32,39 @@ let a, b;
 while (i < 2) {
     while (true) {
         a = prompt('Один из последних просмотренных фильмов?');
-        if (a != null && a.length!= 0 && a.length <= 50) {
+        if (a != null && a.length!= 0 && a.length <= 50 && !a.match(/[0-9]/g)) {
             break;
         }
     }
-    b = prompt('На сколько оцените его?');
+    while (true) {
+        b = parseFloat(+prompt('На сколько оцените его?'));
+        if (b > 0 && b <= 10) {
+            break;
+        }
+    }
     personalMovieDB.movies[a] = b;
     i++;
 }
 
-console.log(personalMovieDB);
+
+const writeYourGenres = () => {
+    let favMovie;
+    let n = 1;
+    while (n <= 3) {
+        while (true) {
+            favMovie = prompt(`Ваш любимый жанр под номером ${n}`);
+            if (favMovie != null && favMovie.length != 0 && !favMovie.match(/[0-9]/g)) {
+                break;
+            }
+        }
+        personalMovieDB.genres.push(favMovie);
+        n++;
+    }
+}
+
+
+writeYourGenres();
+
 if (personalMovieDB.count < 10) {
     console.log("Просмотрено довольно мало фильмов");
 } else if (personalMovieDB.count < 30) {
@@ -51,3 +74,13 @@ if (personalMovieDB.count < 10) {
 } else {
     console.log('Произошла ошибка');
 }
+
+const showMyDB = () => {
+    if (personalMovieDB.privat == false) {
+        console.log(personalMovieDB);
+    }
+}
+
+showMyDB();
+
+
