@@ -12,39 +12,29 @@
 
 4) Потренироваться и переписать цикл еще двумя способами*/
 let numberOfFilms;
-while (true) {
-    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
-    if (numberOfFilms > 0) {
-        break;
-    }
-}
-
-const personalMovieDB = {
-    count: numberOfFilms,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false
-}
-
 let i = 0;
 let a, b;
-while (i < 2) {
-    while (true) {
-        a = prompt('Один из последних просмотренных фильмов?');
-        if (a != null && a.length!= 0 && a.length <= 50 && !a.match(/[0-9]/g)) {
-            break;
+
+
+const movieSurvey = () => {
+    while (i < 2) {
+        while (true) {
+            a = prompt('Один из последних просмотренных фильмов?');
+            if (a != null && a.length!= 0 && a.length <= 50 && !a.match(/[0-9]/g)) {
+                break;
+            }
         }
-    }
-    while (true) {
-        b = parseFloat(+prompt('На сколько оцените его?'));
-        if (b > 0 && b <= 10) {
-            break;
+        while (true) {
+            b = parseFloat(+prompt('На сколько оцените его?'));
+            if (b > 0 && b <= 10) {
+                break;
+            }
         }
+        personalMovieDB.movies[a] = b;
+        i++;
     }
-    personalMovieDB.movies[a] = b;
-    i++;
 }
+
 
 
 const writeYourGenres = () => {
@@ -63,16 +53,16 @@ const writeYourGenres = () => {
 }
 
 
-writeYourGenres();
-
-if (personalMovieDB.count < 10) {
-    console.log("Просмотрено довольно мало фильмов");
-} else if (personalMovieDB.count < 30) {
-    console.log("Вы классический зритель");
-} else if (personalMovieDB.count >= 30){
-    console.log("Вы киноман")
-} else {
-    console.log('Произошла ошибка');
+const defineMovieCount = () => {
+    if (personalMovieDB.count < 10) {
+        console.log("Просмотрено довольно мало фильмов");
+    } else if (personalMovieDB.count < 30) {
+        console.log("Вы классический зритель");
+    } else if (personalMovieDB.count >= 30){
+        console.log("Вы киноман")
+    } else {
+        console.log('Произошла ошибка');
+    }
 }
 
 const showMyDB = () => {
@@ -81,6 +71,26 @@ const showMyDB = () => {
     }
 }
 
+while (true) {
+    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+    if (numberOfFilms > 0) {
+        break;
+    }
+}
+
+const personalMovieDB = {
+    count: numberOfFilms,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false
+}
+
+movieSurvey();
+writeYourGenres();
+defineMovieCount();
 showMyDB();
+
+
 
 
