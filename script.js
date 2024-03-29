@@ -11,85 +11,80 @@
 "Вы киноман". А если не подошло ни к одному варианту - "Произошла ошибка"
 
 4) Потренироваться и переписать цикл еще двумя способами*/
-let numberOfFilms;
-let i = 0;
-let a, b;
 
 
-const movieSurvey = () => {
-    while (i < 2) {
-        while (true) {
-            a = prompt('Один из последних просмотренных фильмов?');
-            if (a != null && a.length!= 0 && a.length <= 50 && !a.match(/[0-9]/g)) {
-                break;
-            }
-        }
-        while (true) {
-            b = parseFloat(+prompt('На сколько оцените его?'));
-            if (b > 0 && b <= 10) {
-                break;
-            }
-        }
-        personalMovieDB.movies[a] = b;
-        i++;
-    }
-}
-
-
-
-const writeYourGenres = () => {
-    let favMovie;
-    let n = 1;
-    while (n <= 3) {
-        while (true) {
-            favMovie = prompt(`Ваш любимый жанр под номером ${n}`);
-            if (favMovie != null && favMovie.length != 0 && !favMovie.match(/[0-9]/g)) {
-                break;
-            }
-        }
-        personalMovieDB.genres.push(favMovie);
-        n++;
-    }
-}
-
-
-const defineMovieCount = () => {
-    if (personalMovieDB.count < 10) {
-        console.log("Просмотрено довольно мало фильмов");
-    } else if (personalMovieDB.count < 30) {
-        console.log("Вы классический зритель");
-    } else if (personalMovieDB.count >= 30){
-        console.log("Вы киноман")
-    } else {
-        console.log('Произошла ошибка');
-    }
-}
-
-const showMyDB = () => {
-    if (personalMovieDB.privat == false) {
-        console.log(personalMovieDB);
-    }
-}
-
-while (true) {
-    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
-    if (numberOfFilms > 0) {
-        break;
-    }
-}
 
 const personalMovieDB = {
-    count: numberOfFilms,
+    count: 0,
     movies: {},
     actors: {},
     genres: [],
-    privat: false
-}
+    privat: false,
+    start: function() {
+        while (true) {
+            personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
+            if (personalMovieDB.count > 0) {
+                break;
+            }
+        }
+    },
 
-movieSurvey();
-writeYourGenres();
-defineMovieCount();
-showMyDB();
+    movieSurvey: function() {
+        for (let i = 0; i < 2; i++) {
+            const a = prompt('Один из последних просмотренных фильмов?'),
+                  b = parseFloat(+prompt('На сколько оцените его?', ''));
+
+            if (a != null && b != null && a != '' && b != '' && a.length <= 50) {
+                personalMovieDB.movies[a] = b;
+                console.log('done');
+            } else {
+                console.log('error');
+                i--;
+            }
+        }
+    },
+
+    writeYourGenres: function() {
+        let n = 1;
+        while (n <= 3) {
+            while (true) {
+                favMovie = prompt(`Ваш любимый жанр под номером ${n}`);
+                if (favMovie != null && favMovie.length != 0 && !favMovie.match(/[0-9]/g)) {
+                    break;
+                }
+            }
+            personalMovieDB.genres.push(favMovie);
+            n++;
+        }
+    },
+
+    defineMovieCount: function() {
+        if (personalMovieDB.count < 10) {
+            console.log("Просмотрено довольно мало фильмов");
+        } else if (personalMovieDB.count < 30) {
+            console.log("Вы классический зритель");
+        } else if (personalMovieDB.count >= 30){
+            console.log("Вы киноман")
+        } else {
+            console.log('Произошла ошибка');
+        }
+    },
+
+    showMyDB: function() {
+        if (personalMovieDB.privat == false) {
+            console.log(personalMovieDB);
+        }
+    },
+
+    toggleVisibleMyDB: function() {
+        if (personalMovieDB.privat) {
+            personalMovieDB.privat = false;
+        } else {
+            personalMovieDB.privat = true;
+        }
+    }
+};
+
 
 
 
