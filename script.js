@@ -56,6 +56,10 @@ const personalMovieDB = {
             personalMovieDB.genres.push(favMovie);
             n++;
         }
+
+        personalMovieDB.genres.forEach((item, i)=> {
+            console.log(`Любимый жанр #${i+1} - это ${item}`);
+        })
     },
 
     defineMovieCount: function() {
