@@ -1,20 +1,32 @@
 'use strict';
 
-const box = document.getElementById('box'),
-      btns = document.getElementsByTagName('button'),
-      circles = document.getElementsByClassName('circle'),
-      hearts = document.querySelectorAll('.heart'),
-      oneHeart = document.querySelector('.heart');
+const btns = document.querySelectorAll('button');
+const overlay = document.querySelector('.overlay');
 
-// box.style.backgroundColor = 'blue';
-// box.style.width = '500px';
+// btn.onclick = function() {
+//     alert("STOP!!!");
+// };
 
-box.style.cssText = 'background-color: purple; width: 500px';
+let i = 0;
+const deleteElement = (e) => {
+    console.log(e.currentTarget);
+    console.log(e.type);
+    // i++;
+    // if (i == 1) {
+    //     btn.removeEventListener('click', deleteElement);
+    // }
+}
 
-btns[1].style.borderRadius = '100%';
-circles[2].style.backgroundColor = 'green';
+btns.forEach(btn => {
+    btn.addEventListener('click', deleteElement, {once:true});
+})
 
+// overlay.addEventListener('click', deleteElement);
 
-hearts.forEach(item => {
-    item.style.backgroundColor = 'blue';
+const link = document.querySelector('a');
+
+link.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    console.log(e.target);
 });
