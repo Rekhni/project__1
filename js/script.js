@@ -11,11 +11,63 @@
 
 // console.log(document.querySelector('[data-current="3"]').nextElementSibling);
 
-for (let node of document.body.childNodes) {
+let students = {
+    js: [{
+        name: 'John',
+        progress: 100
+    }, {
+        name: 'Ivan',
+        progress: 60
+       }
+    ],
+    
+    html: {
+        basic: [{
+            name: 'Peter',
+            progress: 20
+        }, {
+            name: 'Ann',
+            progress: 18
+        }],
 
-    if (node.nodeName === "#text") {
-        continue;
+        pro: [{
+            name: 'Sam',
+            progress: 10
+        }],
+
+        semi: {
+            students: [{
+                name: 'Test',
+                progress: 100
+            }]
+        }
     }
+};
 
-    console.log(node);
+
+function getTotalProgressByRecursion(data) {
+    if (Array.isArray(data)) {
+        let total = 0;
+
+        for (let i = 0; i < data.length; i++) {
+            total += data[i].progress;
+        }
+
+        return [total, data.length];
+    } else {
+        let total = [0, 0];
+
+        for (let subData of Object.values(data)) {
+            const subDataArr = getTotalProgressByRecursion(subData);
+            total[0] += subDataArr[0];
+            total[1] += subDataArr[1];
+        }
+
+        return total;
+    }
 }
+
+const res = getTotalProgressByRecursion(students);
+
+console.log(res[0]/res[1]);
+
