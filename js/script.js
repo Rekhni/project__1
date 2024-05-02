@@ -1,73 +1,37 @@
-'use strict';
+// touchstart
+// touchmove
+// touchend
+// touchenter
+// touchleave
+// touchcancel
 
-// console.log(document.head);
-// console.log(document.documentElement);
-// console.log(document.body.childNodes);
-// console.log(document.body.firstChild);
-// console.log(document.body.firstElementChild);
-// console.log(document.body.lastChild);
+window.addEventListener('DOMContentLoaded', () => {
+    const box = document.querySelector('.box');
 
-// console.log(document.querySelector('#current').parentNode.parentNode);
+    box.addEventListener('touchstart', (e) => {
+        e.preventDefault();
 
-// console.log(document.querySelector('[data-current="3"]').nextElementSibling);
+        console.log('Start');
+        console.log(e.targetTouches);
+    });
 
-let students = {
-    js: [{
-        name: 'John',
-        progress: 100
-    }, {
-        name: 'Ivan',
-        progress: 60
-       }
-    ],
-    
-    html: {
-        basic: [{
-            name: 'Peter',
-            progress: 20
-        }, {
-            name: 'Ann',
-            progress: 18
-        }],
+    // box.addEventListener('touchmove', (e) => {
+    //     e.preventDefault();
 
-        pro: [{
-            name: 'Sam',
-            progress: 10
-        }],
+    //     console.log('Move');
+    // });
 
-        semi: {
-            students: [{
-                name: 'Test',
-                progress: 100
-            }]
-        }
-    }
-};
+    // box.addEventListener('touchend', (e) => {
+    //     e.preventDefault();
 
+    //     console.log('End');
+    // });
 
-function getTotalProgressByRecursion(data) {
-    if (Array.isArray(data)) {
-        let total = 0;
+    // box.addEventListener('touchenter', (e) => {
+    //     e.preventDefault();
 
-        for (let i = 0; i < data.length; i++) {
-            total += data[i].progress;
-        }
+    //     console.log('Enter');
+    // })
+});
 
-        return [total, data.length];
-    } else {
-        let total = [0, 0];
-
-        for (let subData of Object.values(data)) {
-            const subDataArr = getTotalProgressByRecursion(subData);
-            total[0] += subDataArr[0];
-            total[1] += subDataArr[1];
-        }
-
-        return total;
-    }
-}
-
-const res = getTotalProgressByRecursion(students);
-
-console.log(res[0]/res[1]);
 
