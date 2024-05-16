@@ -1,35 +1,59 @@
-'use strict';
-
-const birthday = Symbol('birthday');
 
 const user = {
-    name: "Alex",
-    surname: "Smith",
-    [birthday]: '02/08/1999',
+    name: 'Alex',
+    surname: 'Smith',
+    birthday: '20/04/1993',
     showMyPublicData: function() {
         console.log(`${this.name} ${this.surname}`);
     }
-};
+}
 
-// console.log(Object.getOwnPropertyDescriptor(user, 'name'));
+// const userMap = new Map(Object.entries(user));
 
-// Object.defineProperty(user, 'birthday', {value: "02/08/1999", writable: true});
+// console.log(userMap);   
 
-// console.log(Object.getOwnPropertyDescriptor(user, 'birthday'));
+// const newUserObj = Object.fromEntries(userMap);
 
-for (let key in user) console.log(key);
+// console.log(newUserObj);
 
-Object.defineProperties(user, {
-    name: {writable: false},
-    surname: {writable: false}
+
+const shops = [
+    {rice: 500},
+    {oil: 200},
+    {bread: 50}
+]
+
+
+const budget = [5000, 15000, 25000];
+
+const map = new Map([
+    [{paper: 1000}, 8000]
+]);
+
+shops.forEach((shop, i) => {
+    map.set(shop, budget[i]);
+})
+
+// console.log(map);
+// console.log(map.get(shops[0]));
+// console.log(map.has(shops[0]));
+
+// const goods = [];
+// for (let shop of map.keys()) {
+//     goods.push(Object.keys(shop)[0]);
+// }
+
+// console.log(goods);
+
+// for (let price of map.values()) {
+//     console.log(price);
+// }
+
+// for (let [shop, price] of map.entries()) {
+//     console.log(price, shop);
+// }
+
+
+map.forEach((value, key, map) => {
+    console.log(key, value);
 });
-
-console.log(Object.getOwnPropertyDescriptor(user, birthday));
-
-// user.birthday = '02/02/2000';
-
-// console.log(user);
-
-// enumerable
-// writable
-// configurable
