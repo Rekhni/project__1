@@ -1,29 +1,28 @@
-const arr = ['Reha', 'Omir', 'Reha'];
+const btns = document.querySelectorAll('button'),
+      wrapper = document.querySelector('.btn-block');
 
-const set = new Set(arr);
+// console.log(btns[0].classList.length);
+// console.log(btns[0].classList.item(1));
+// console.log(btns[0].classList.add('red', 'reha'));
+// console.log(btns[0].classList.remove('blue'));
 
-// set.add('Ivan')
-//     .add('Reha');
 
-// console.log(set);
+btns[0].addEventListener('click', () => {
+    // if (btns[1].classList.contains('red')) {
+    //     btns[1].classList.remove('red');
+    // } else {
+    //     btns[1].classList.add('red');
+    // }
 
-// function unique(arr) {
-//     return Array.from(new Set(arr));
-// }
+    btns[1].classList.toggle('red');
+})
 
-// console.log(unique(arr));
+wrapper.addEventListener('click', (event) => {
+    if (event.target && event.target.tagName == 'BUTTON') {
+        console.log('Reha');
+    }
+});
 
-// set.delete(value);
-// set.has(value);
-// set.clear();
-// set.size;
-
-// for (let value of set) console.log(value);
-
-// set.forEach((value, valueAgaing) => {
-//     console.log(value, valueAgaing);
-// })
-
-console.log(set.values());
-console.log(set.keys());
-console.log(set.entries());
+const newBtn = document.createElement('button');
+newBtn.classList.add('red');
+wrapper.append(newBtn);
