@@ -1,27 +1,28 @@
 'use strict'
 
-// const now = new Date('1999-08-02');
+const box = document.querySelector('.box'),
+      btn = document.querySelector('button');
 
-// console.log(now);
-// console.log(now.setHours(20))
-// console.log(now);
+const width = box.clientWidth;
+const height = box.clientHeight;
 
-// console.log(now.getFullYear());
-// console.log(now.getMonth());
-// console.log(now.getDate());
-// console.log(now.getDay());
-// console.log(now.getHours());
-// console.log(now.getUTCHours());
+console.log(width, height);
 
-// console.log(now.getTimezoneOffset());
 
-let start = new Date();
+btn.addEventListener('click', () => {
+   // box.style.height = box.scrollHeight + 'px';
+   console.log(box.scrollTop);
+})
 
-for (let i = 0; i < 100000; i++) {
-   let some = i ** 3;
-}
 
-let end = new Date();
+console.log(box.getBoundingClientRect().top);
 
-alert(`Операция выполнилась за ${end - start} миллисекунд`);
+const style = window.getComputedStyle(box);
+
+console.log(style.display);
+
+console.log(document.documentElement.scrollTop);
+
+
+
 
