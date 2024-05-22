@@ -1,87 +1,35 @@
 'use strict'
 
-// function showThis(a, b) {
-//    console.log(this);
-//    function sum() {
-//       console.log(this);
-//       return a + b;
-//    }
-//    console.log(sum());
-// }
+class Rectangle {
+   constructor(height, width) {
+      this.height = height;
+      this.width = width;
+   }
 
-// showThis(4, 5);
+   calcArea() {
+      return this.height * this.width;
+   }
+}
 
+class ColoredRectangleWithText extends Rectangle {
+   constructor(height, width, text, bgColor) {
+      super(height, width);
+      this.bgColor = bgColor;
+      this.text = text;
+   }
 
-// const obj = {
-//    a: 20,
-//    b: 15,
-//    sum: function() {
-//       function shout() {
-//          console.log(this);
-//       }
-//       shout();
-//    }
-// };
+   showMyProps() {
+      console.log(`Text: ${this.text}, bgColor: ${this.bgColor}`);
+   }
+}
 
-// obj.sum();
+// const square = new Rectangle(10, 10);
+// const long = new Rectangle(20, 200)
 
-// function User(name, id) {
-//    this.name = name;
-//    this.id = id;
-//    this.human = true;
-//    this.hello = function() {
-//       console.log(`Hello ${this.name}`);
-//    }
-// }
+// console.log(square.calcArea());
+// console.log(long.calcArea());
 
-// let ivan = new User('Ivan', 23);
+const res = new ColoredRectangleWithText(30, 30, 'Reha is the best!', 'green');
 
-// function sayName(surname) {
-//    console.log(this);
-//    console.log(this.name + ' ' + surname);
-// }
-
-// const user = {
-//    name: 'Reha'
-// };
-
-// sayName.call(user, 'Kuanysh');
-// sayName.apply(user, ['Kuanysh']);
-
-// function count(num) {
-//    return this * num;
-// }
-
-// const double = count.bind(2);
-// console.log(double(5));
-
-
-
-// 1) Обычная функция: this = window, но если use strict - undefined
-// 2) Контекст у методов обьекта - сам обьект
-// 3) this в конструкторах и классах - это новый экземпляр обьекта
-
-
-// const btn = document.querySelector('button');
-
-// btn.addEventListener('click', function(){
-//    this.style.backgroundColor = 'green';
-// });
-
-
-// const obj = {
-//    num: 5,
-//    sayNumber: function() {
-//       const say = () => {
-//          console.log(this.num);
-//       };
-//       say();
-//    }
-// }  
-
-// obj.sayNumber();
-
-
-const double = (a, b) => a * b;
-
-console.log(double(11, 3));
+res.showMyProps();
+console.log(res.calcArea());
