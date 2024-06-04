@@ -1,35 +1,54 @@
 'use strict'
 
-class Rectangle {
-   constructor(height, width) {
-      this.height = height;
-      this.width = width;
-   }
+// console.log('Запрос данных...');
 
-   calcArea() {
-      return this.height * this.width;
-   }
-}
+// const req = new Promise((resolve, reject) => {
+//    setTimeout(() => {
+//       console.log('Подготовка данных...');
+   
+//       const product = {
+//          name: 'TV',
+//          price: 2000
+//       };
+      
+//       resolve(product);
+//    }, 2000);
+// })
 
-class ColoredRectangleWithText extends Rectangle {
-   constructor(height, width, text, bgColor) {
-      super(height, width);
-      this.bgColor = bgColor;
-      this.text = text;
-   }
+// req.then((product) => {
+//    return new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//          product.status = 'order';
+//          resolve(product);
+//       }, 2000)
+//    })
+// }).then(data => {
+//    data.modify = true;
+//    return data;
+// }).then(data => {
+//    console.log(data);
+// }).catch(() => {
+//    console.error('Произошла ошибка');
+// }).finally(() => {
+//    console.log('finally');
+// })
 
-   showMyProps() {
-      console.log(`Text: ${this.text}, bgColor: ${this.bgColor}`);
-   }
-}
 
-// const square = new Rectangle(10, 10);
-// const long = new Rectangle(20, 200)
+const test = time => {
+   return new Promise(resolve => {
+      setTimeout(() => resolve(), time);
+   });
+};
 
-// console.log(square.calcArea());
-// console.log(long.calcArea());
+// test(1000).then(() => console.log('1000 ms'));
+// test(2000).then(() => console.log('2000 ms'));
 
-const res = new ColoredRectangleWithText(30, 30, 'Reha is the best!', 'green');
 
-res.showMyProps();
-console.log(res.calcArea());
+Promise.all([test(1000), test(2000)]).then(() => {
+   console.log('All');
+})
+
+
+Promise.race([test(1000), test(2000)]).then(() => {
+   console.log('first');
+})
