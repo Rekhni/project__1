@@ -1,54 +1,34 @@
-'use strict'
+class User {
+   constructor(name, age) {
+      this.Name = name;
+      this.userAge = age;
+   }
 
-// console.log('Запрос данных...');
+   say() {
+      console.log(`Имя пользователя: ${this.Name}, Возраст: ${this.userAge}`);
+   }
 
-// const req = new Promise((resolve, reject) => {
-//    setTimeout(() => {
-//       console.log('Подготовка данных...');
-   
-//       const product = {
-//          name: 'TV',
-//          price: 2000
-//       };
-      
-//       resolve(product);
-//    }, 2000);
-// })
+   get age() {
+      return this.userAge;
+   }
 
-// req.then((product) => {
-//    return new Promise((resolve, reject) => {
-//       setTimeout(() => {
-//          product.status = 'order';
-//          resolve(product);
-//       }, 2000)
-//    })
-// }).then(data => {
-//    data.modify = true;
-//    return data;
-// }).then(data => {
-//    console.log(data);
-// }).catch(() => {
-//    console.error('Произошла ошибка');
-// }).finally(() => {
-//    console.log('finally');
-// })
+   set age(num) {
+      this.userAge = num;
+   }
 
+   get name() {
+      return this.Name;
+   }
 
-const test = time => {
-   return new Promise(resolve => {
-      setTimeout(() => resolve(), time);
-   });
-};
+   set name(n) {
+      this.Name = n;
+   }
+}
 
-// test(1000).then(() => console.log('1000 ms'));
-// test(2000).then(() => console.log('2000 ms'));
+const user = new User('Reha', 24);
 
+user.name = 'Zhanar';
+user.age = 51;
 
-Promise.all([test(1000), test(2000)]).then(() => {
-   console.log('All');
-})
+user.say();
 
-
-Promise.race([test(1000), test(2000)]).then(() => {
-   console.log('first');
-})
